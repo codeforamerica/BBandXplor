@@ -327,6 +327,10 @@ get '/broadband3' do
   erb :broadband3
 end
 
+get '/broadband4' do
+  erb :broadband4
+end
+
 get '/' do
   erb :home
 end
