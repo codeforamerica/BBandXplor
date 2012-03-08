@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+		<title>Bibb County Broadband</title>
+		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+		<script type="text/javascript">
+var map, infoWindow, markers, providers, checkdiv;
+function init(){
+	// set up Google Maps, pointed at Terminal Station, Macon, GA
+	var ctr = new google.maps.LatLng(32.834164,-83.624952);
+	var z = 12;
+	if(gup("lat")){
+		ctr = new google.maps.LatLng(1 * gup("lat"), 1 * gup("lng"));
+		z = 1 * gup("z");
+	}
+	var mapOptions = {
+		center: ctr,
+		zoom: z,
+		mapTypeId: google.maps.MapTypeId.ROADMAP
+	};
+	map = new google.maps.Map($("map_canvas"), mapOptions);
+
+	infoWindow = new google.maps.InfoWindow({ maxWidth: 350 });
+	google.maps.event.addListener(map, 'click', function() {
+		infoWindow.close();
+	});
+	
+	google.maps.event.addListener(map, 'bounds_changed', function() {
+		updatePerma();
+	});
+	
+	providers = [
+		{id:"all",url:"alltel.kmz"},
+		{id:"wil",url:"wildblue.kmz"},
+		{id:"att",url:"att.kmz"},
+		{id:"cri",url:"cricket.kmz"},
+		{id:"spr",url:"sprint.kmz"},
+		{id:"tmo",url:"tmobile.kmz"},
+		{id:"ver",url:"verizon.kmz"},
+		{id:"xoc",url:"xocomm.kmz"},
+		{id:"win",url:"windstream.kmz"},
+		{id:"fli",url:"flint.kmz"},
+		{id:"cox",url:"coxcable.kmz"},
+		{id:"bel",url:"bellsouth.kmz"},
+		{id:"lev",url:"lvl3.kmz"},
+		{id:"twt",url:"twtelecom.kmz"},
+		{id:"holes",url:"ispholes.kml"}
+	];
+	
+	for(var p=0;p<providers.length;p++){
+		providers[p].layer = new google.maps.KmlLayer('http://pdfmongotest.herokuapp.com/' + providers[p].url, { suppressInfoWindows: true, preserveViewport: true });
+		if(gup("lyrs")){
+			if(gup("lyrs").indexOf(providers[p].id) > -1){
+				$(providers[p].id).innerHTML = '&check;' + $(providers[p].id).innerHTML;
+				providers[p].layer.setMap(map);
+			}
+		}
+	}
+	
+	checkdiv = document.createElement("div");
+	checkdiv.innerHTML = "&check;";
+}
+function bindWindow(mapmrk, datamrk){
+	google.maps.event.addListener(mapmrk, 'click', function() {
+		infoWindow.setContent("<h3>" + datamrk.name + "</h3>" + datamrk.details + "<hr/><a href='" + datamrk.link + "' target='_blank'>" + datamrk.link + "</a>");
+		infoWindow.open(map, mapmrk);
+	});
+}
+function toggle(btn){
+	var setLayerOn = map;
+	if(btn.innerHTML.indexOf(checkdiv.innerHTML) > -1){
+		setLayerOn = null;
+		btn.innerHTML = btn.innerHTML.replace(checkdiv.innerHTML,'');
+	}
+	else{
+		btn.innerHTML = '&check;' + btn.innerHTML;
+	}
+	for(var p=0;p<providers.length;p++){
+		if(providers[p].id == btn.id){
+			providers[p].layer.setMap(setLayerOn);
+			break;
+		}
+	}
+	updatePerma();
+}
+function updatePerma(){
+	var lat = map.getCenter().lat();
+	var lng = map.getCenter().lng();
+	var zoom = map.getZoom();
+	var lyrs = [ ];
+	for(var p=0;p<providers.length;p++){
+		if(providers[p].layer.getMap()){
+			lyrs.push(providers[p].id);
+		}
+	}
+	$("perma").href = "http://pdfmongotest.herokuapp.com/broadband?lat=" + lat + "&lng=" + lng + "&z=" + zoom + "&lyrs=" + lyrs.join(',');
+}
+function gup(nm){nm=nm.replace(/[\[]/,"\[").replace(/[\]]/,"\]");var rxS="[\?&]"+nm+"=([^&#]*)";var rx=new RegExp(rxS);var rs=rx.exec(window.location.href);if(!rs){return null;}else{return rs[1];}}
+function $(id){
+	return document.getElementById(id);
+}
+		</script>
+		<style type="text/css">
+html, body {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	font-family: georgia, arial, serif;
+}
+#sidebar {
+	float: left;
+	width: 19%;
+	height: 100%;
+}
+#map_canvas {
+	float: left;
+	width: 80%;
+	height: 100%;
+}
+		</style>
+	</head>
+	<body onload="init()">
+		<div id="sidebar">
+			<h3>Terrestrial</h3>
+			<ul>
+				<li>
+					<a id="bel" href="#" class="btn" onclick="toggle(this)">Bell South</a>
+				</li>
+				<li>
+					<a id="cox" href="#" class="btn" onclick="toggle(this)">Cox Cable</a>				
+				</li>
+				<li>
+					<a id="fli" href="#" class="btn" onclick="toggle(this)">Flint</a>
+				</li>
+				<li>
+					<a id="lev" href="#" class="btn" onclick="toggle(this)">Level 3</a>
+				</li>
+				<li>
+					<a id="twt" href="#" class="btn" onclick="toggle(this)">TW Telecom</a>
+				</li>
+				<li>
+					<a id="win" href="#" class="btn" onclick="toggle(this)">Windstream</a>
+				</li>
+				<li>
+					<a id="xoc" href="#" class="btn" onclick="toggle(this)">XO Comm.</a>
+				</li>
+			</ul>
+			<h3>Wireless</h3>
+			<ul>
+				<li>
+					<a id="att" href="#" class="btn" onclick="toggle(this)">AT&amp;T</a>
+				</li>
+				<li>
+					<a id="all" href="#" class="btn" onclick="toggle(this)">Alltel</a>				
+				</li>
+				<li>
+					<a id="cri" href="#" class="btn" onclick="toggle(this)">Cricket</a>
+				</li>
+				<li>
+					<a id="spr" href="#" class="btn" onclick="toggle(this)">Sprint</a>
+				</li>
+				<li>
+					<a id="tmo" href="#" class="btn" onclick="toggle(this)">T-Mobile</a>
+				</li>
+				<li>
+					<a id="wil" href="#" class="btn" onclick="toggle(this)">WildBlue</a>
+				</li>
+				<li>
+					<a id="ver" href="#" class="btn" onclick="toggle(this)">Verizon</a>
+				</li>
+			</ul>
+			<h3>Holes File</h3>
+			<ul>
+				<li>
+					<a id="holes" href="#" class="btn" onclick="toggle(this)">Holes</a>
+				</li>
+			</ul>
+			<hr/>
+			<a id="perma" href="http://pdfmongotest.herokuapp.com/broadband">Link to this View</a>
+			<br/>
+			<small>Data from <a href="http://www.broadbandmap.gov/summarize/state/georgia/county/bibb">BroadbandMap.gov</a><br/>
+			US Dept of Commerce, NTIA, State Broadband Initiative (12/30/2010)</small>
+		</div>
+		<div id="map_canvas">
+		</div>
+	</body>
+</html>

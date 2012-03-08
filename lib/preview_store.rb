@@ -1,0 +1,2 @@
+class PreviewStore < Uploader
+end
