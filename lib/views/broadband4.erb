@@ -1606,8 +1606,8 @@ function findSView(){
 	var foundHole = null;
 	var lat, lng, ll;
 	while(!foundHole){
-		lat = Math.random() * (40.528936 - 40.332936) + 40.332936;
-		lng = Math.random() * (-79.779625 + 80.062523) - 80.062523;
+		lat = Math.random() * (21.735902 - 21.253862) + 21.253862;
+		lng = Math.random() * (-157.628746 + 158.292389) - 158.292389;
 		ll = new google.maps.LatLng(lat,lng);
 		for(var h=0; h<viewholes.length; h++){
 			if(google.maps.geometry.poly.containsLocation( ll, viewholes[h] )){
