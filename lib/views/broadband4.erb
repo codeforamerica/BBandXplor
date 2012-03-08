@@ -75,8 +75,8 @@ function findSView(){
 	var foundHole = null;
 	var lat, lng, ll;
 	while(!foundHole){
-		lat = Math.random() * (40.528936 - 40.332936) + 40.332936;
-		lng = Math.random() * (-79.779625 + 80.062523) - 80.062523;
+		lat = Math.random() * (32.94635021708248 - 32.695556653552394) + 32.695556653552394;
+		lng = Math.random() * (-83.50668267569733 + 83.80949334464265) - 83.80949334464265;
 		ll = new google.maps.LatLng(lat,lng);
 		for(var h=0; h<viewholes.length; h++){
 			if(google.maps.geometry.poly.containsLocation( ll, viewholes[h] )){
