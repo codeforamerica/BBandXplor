@@ -1,11 +1,18 @@
-# PDF Archive
+# BBandXplor
+BBandXplor lets you explore and evaluate hundreds of highlighted neighborhoods within a city, using random Google Street View locations.
+The goal is to build consensus (or crowdsource) subjective information about the neighborhoods.
 
-PDF Archive is a simple PDF storage and retrieval system. Uploading a PDF will store it, create a preview image for search listings, and extract the text from it so it can be indexed for search.
+For example, the Pittsburgh BBandXplor map explores the question: why were hundreds of areas cut out of ISPs' maps?
+Viewers can vote on whether the exception is benign ( highways and parks ), concerning ( vacant houses ), or worth targeting ( areas with homes and businesses ).
+
+The same program could be used to explore food deserts and find locations suitable for a farmers' market or community garden.
+
+The server-side codebase is a Ruby on Rails app designed for hosting on Heroku.
 
 ## Setup
 
-    git clone git://github.com/rwdaigle/demo-cedar-pdfarchive.git
-    cd demo-cedar-pdfarchive
+    git clone git://github.com/mapmeld/BBandXplor.git
+    cd BBandXplor
     gem install bundle
     bundle
 
@@ -27,7 +34,7 @@ Running this on Heroku requires the following steps:
 ### Step 1: Create the app on the Heroku Cedar stack
 
     gem install heroku
-    heroku apps:create app_name --stack cedar
+    heroku apps:create YOUR_APP_NAME_HERE --stack cedar
 
 We also need to configure it to run in production
 
@@ -39,32 +46,18 @@ The MongoHQ or MongoLab Addons will give us a small free MongoDB instance for st
 
     heroku addons:add mongohq:free
 
-or
-
-    heroku addons:add mongolab:starter
-
-### Step 3: Configure For S3
-
-First setup an Amazon AWS account, get your key, secret, and create a bucket. Then take those values and configure the environment variables on Heroku.
-
-    heroku config:add AWS_ACCESS_KEY_ID=<aws_access_key_id> \
-                      AWS_SECRET_ACCESS_KEY=<aws_secret_access_key> \
-                      BUCKET_NAME=<bucket_name>
-
-### Step 4: Deploy to Heroku
+### Step 3: Deploy to Heroku
 
     git push heroku master
     heroku scale web=1 worker=1
-    heroku open
-
-When it is finished deploying it will give you the url to your app. Visit in the browser and enjoy!
 
 ## License
+Free BSD licensed
 
+The server-side code is adapted from Jonathan Hoyt's PDF Archive example for using MongoDB with Heroku.
+That license agreement is printed below:
+---
 Copyright (c) 2011 Jonathan Hoyt
-
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
