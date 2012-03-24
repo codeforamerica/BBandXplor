@@ -4618,7 +4618,7 @@ viewholes.push([
 function sendAndNext(){
   var s = document.createElement("script");
   s.type = "text/javascript";
-  s.src = "/store?lat=" + map.getCenter().lat() + "&lng=" + map.getCenter().lng() + "&area=" + activeArea + "&response=" + encodeResponse();
+  s.src = "/store?lat=" + map.getStreetView().getPosition().lat() + "&lng=" + map.getStreetView().getPosition().lng() + "&area=" + activeArea + "&response=" + encodeResponse();
   document.body.appendChild(s);
   findSView();
 }

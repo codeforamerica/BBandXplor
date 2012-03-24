@@ -76,7 +76,7 @@ get '/store' do
       :hostmap => "broadband3",
       :area => params["area"],
       :latlng => [ params["lat"].to_f, params["lng"].to_f ],
-      :reponse => params["rep"]
+      :response => params["rep"]
     })
   #Qu.enqueue(ProcessSVReport, qualreport.id)
 end
