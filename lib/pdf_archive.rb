@@ -75,7 +75,8 @@ get '/store' do
       :submitted => Time.now(),
       :hostmap => "broadband3",
       :area => params["area"],
-      :latlng => [ params["lat"].to_f, params["lng"].to_f ]
+      :latlng => [ params["lat"].to_f, params["lng"].to_f ],
+      :reponse => params["rep"]
     })
   #Qu.enqueue(ProcessSVReport, qualreport.id)
 end
