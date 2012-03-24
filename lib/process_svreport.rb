@@ -1,6 +1,6 @@
 class ProcessSVReport
   def self.perform(params)
-    //document = SVReport.find!(params["id"])
+    #document = SVReport.find!(params["id"])
     
     document = SVReport.create({
       :submitted => Time.now(),
