@@ -1,13 +1,6 @@
 class ProcessSVReport
   def self.perform(params)
     #document = SVReport.find!(params["id"])
-    
-    document = SVReport.create({
-      :submitted => Time.now(),
-      :hostmap => "broadband3",
-      :area => params["area"],
-      :latlng => [ params["lat"], params["lng"] ]
-    })
 
     #pdf = document.pdf
 

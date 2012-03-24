@@ -71,8 +71,13 @@ end
 
 get '/store' do
   # accept AJAX post
-  qualreport = SVReport.create!(params)
-  Qu.enqueue(ProcessSVReport, qualreport.id)
+  qualreport = SVReport.create({
+      :submitted => Time.now(),
+      :hostmap => "broadband3",
+      :area => params["area"],
+      :latlng => [ params["lat"], params["lng"] ]
+    })
+  #Qu.enqueue(ProcessSVReport, qualreport.id)
 end
 
 get '/' do
