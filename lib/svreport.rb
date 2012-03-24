@@ -6,7 +6,7 @@ class SVReport
   key :hostmap, String
   key :area, String
   key :submitted, Time
-  key :response, String
+  key :response, Array
 
   searches :id, :area
 end

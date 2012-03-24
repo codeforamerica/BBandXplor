@@ -91,6 +91,30 @@ function init(){
 		findSView();
 	}
 }
+function sendAndNext(){
+  var s = document.createElement("script");
+  s.type = "text/javascript";
+  s.src = "/store?survey=foodband&lat=" + map.getStreetView().getPosition().lat() + "&lng=" + map.getStreetView().getPosition().lng() + "&area=" + activeArea + "&response=" + encodeResponse();
+  document.body.appendChild(s);
+  findSView();
+}
+function encodeResponse(){
+  var coded = [getCheckedValue("stereotype")];
+  coded.push(getCheckedValue("vacant"));
+  coded.push(getCheckedValue("parking"));
+  coded.push(getCheckedValue("abandoned"));
+  return coded.join(";")
+}
+function getCheckedValue(radioName) {
+  var radioObj = document.getElementsByClassName(radioName);
+  var radioLength = radioObj.length;
+  for(var i = 0; i < radioLength; i++) {
+	if(radioObj[i].checked) {
+	  return radioObj[i].value;
+	}
+  }
+  return "";
+}
 function findSView(){
 	document.getElementById("svsearch").disabled = true;
 	var foundHole = null;
@@ -229,6 +253,8 @@ label {
 				<input type="radio" name="abandoned"/>
 				No
 			</label>
+			<br/>
+			<input type="button" value="Submit" onclick="sendAndNext()"/>
 			<hr/>
 			<a id="perma" href="http://bbandxplor.herokuapp.com/broadband3">Link to this View</a>
 			<br/>
