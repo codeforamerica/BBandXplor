@@ -51,6 +51,15 @@ The MongoHQ or MongoLab Addons will give us a small free MongoDB instance for st
     git push heroku master
     heroku scale web=1 worker=1
 
+### Step 4: Create geospatial index
+
+Log into heroku.com and open the app's page
+On the right, under the banner, select MongoHQ from Addons
+On the MongoHQ page, select the sv_reports collection
+On the row of tabs (Documents open by default) select Indexes
+Click "Create a Geospatial Index". Set Location Field to "latlng" with Min -180 and Max 180
+Click "Create Index" to enable searching reports by location
+
 ## License
 Free BSD licensed
 
