@@ -7,6 +7,10 @@ Bundler.require
 require 'uri'
 require 'net/http'
 
+# for reporting on StreetView locations
+require 'svreport'
+require 'process_svreport'
+
 # Application module
 module PdfArchive
   def self.environment
@@ -63,6 +67,12 @@ end
 
 get '/foodband' do
   erb :broadband4
+end
+
+get '/store' do
+  # accept AJAX post
+  qualreport = SVReport.create!(params)
+  Qu.enqueue(ProcessSVReport, qualreport.id)
 end
 
 get '/' do
