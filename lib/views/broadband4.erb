@@ -171,7 +171,7 @@ function updatePerma(){
 	var lng = map.getCenter().lng();
 	var zoom = map.getZoom();
 	var lyrs = [ ];
-	$("perma").href = "http://bbandxplor.herokuapp.com/broadband3?lat=" + lat + "&lng=" + lng + "&z=" + zoom + "&lyrs=" + lyrs.join(',');
+	$("perma").href = "http://bbandxplor.herokuapp.com/foodband?lat=" + lat + "&lng=" + lng + "&z=" + zoom + "&lyrs=" + lyrs.join(',');
 }
 function gup(nm){nm=nm.replace(/[\[]/,"\[").replace(/[\]]/,"\]");var rxS="[\?&]"+nm+"=([^&#]*)";var rx=new RegExp(rxS);var rs=rx.exec(window.location.href);if(!rs){return null;}else{return rs[1];}}
 function $(id){
@@ -256,7 +256,7 @@ label {
 			<br/>
 			<input type="button" value="Submit" onclick="sendAndNext()"/>
 			<hr/>
-			<a id="perma" href="http://bbandxplor.herokuapp.com/broadband3">Link to this View</a>
+			<a id="perma" href="http://bbandxplor.herokuapp.com/foodband">Link to this View</a>
 			<br/>
 			<small>Data from <a href="http://www.broadbandmap.gov/summarize/state/georgia/county/bibb">BroadbandMap.gov</a><br/>
 			US Dept of Commerce, NTIA, State Broadband Initiative (Jun 2011)</small>
