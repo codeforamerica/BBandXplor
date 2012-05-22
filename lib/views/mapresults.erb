@@ -7,7 +7,7 @@
 		<script type="text/javascript">
 var map, infoWindow, markers, providers, checkdiv, viewholes, oldHole;
 function init(){
-	var ctr = new google.maps.LatLng(32.834164,-83.624952);
+	var ctr = new google.maps.LatLng(40.41232,-79.796875);
 	var z = 12;
 	if(gup("lat")){
 		ctr = new google.maps.LatLng(1 * gup("lat"), 1 * gup("lng"));
@@ -32,7 +32,7 @@ function init(){
 	var reports = [ ];
 <% if @reports %>
     <% @reports.each do |report| %>
-	reports.push(<%= report.latlng[0].to_s() + "," + report.latlng[1].to_s() + ",'" + report.response.join(',') + "'" %>);
+	reports.push([ <%= report.latlng[0].to_s() + "," + report.latlng[1].to_s() + ",'" + report.response.join(',') + "'" %> ]);
     <% end %>
 <% end %>
 	for(var r=0;r<reports.length;r++){
