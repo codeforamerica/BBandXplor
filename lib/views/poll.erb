@@ -5,9 +5,9 @@
   <ul>
     <% @reports.each do |report| %>
       <li>
-        Report from area <%= report.area %>
+        Report from area <%= report.area.to_s() %>
       	<br/>
-      	<%= report.latlng[0] + "," + report.latlng[1] %>
+      	<%= report.latlng[0].to_s() + "," + report.latlng[1].to_s() %>
       </li>
     <% end %>
   </ul>
