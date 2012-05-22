@@ -4627,7 +4627,7 @@ function encodeResponse(){
   coded.push(getCheckedValue("houses"));
   coded.push(getCheckedValue("businesses"));
   coded.push(getCheckedValue("abandoned"));
-  return coded.join(";")
+  return coded.join("-")
 }
 function getCheckedValue(radioName) {
   var radioObj = document.getElementsByName(radioName);

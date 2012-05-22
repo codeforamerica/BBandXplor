@@ -103,7 +103,7 @@ function encodeResponse(){
   coded.push(getCheckedValue("vacant"));
   coded.push(getCheckedValue("parking"));
   coded.push(getCheckedValue("abandoned"));
-  return coded.join(";")
+  return coded.join("-")
 }
 function getCheckedValue(radioName) {
   var radioObj = document.getElementsByClassName(radioName);
