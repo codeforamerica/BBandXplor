@@ -885,7 +885,11 @@ function updatePerma(){
 	var lng = map.getCenter().lng();
 	var zoom = map.getZoom();
 	var lyrs = [ ];
-	$("perma").href = "/mapresults?map=" + gup("map") + "&area=" + gup("area") + "lat=" + lat + "&lng=" + lng + "&z=" + zoom + "&lyrs=" + lyrs.join(',');
+	var areathing = "";
+	if(gup("area") && gup("area").length > 0){
+		areathing = "&area=" + gup("area");
+	}
+	$("perma").href = "/mapresults?map=" + gup("map") + areathing + "lat=" + lat + "&lng=" + lng + "&z=" + zoom + "&lyrs=" + lyrs.join(',');
 }
 function gup(nm){nm=nm.replace(/[\[]/,"\[").replace(/[\]]/,"\]");var rxS="[\?&]"+nm+"=([^&#]*)";var rx=new RegExp(rxS);var rs=rx.exec(window.location.href);if(!rs){return null;}else{return rs[1];}}
 function $(id){
