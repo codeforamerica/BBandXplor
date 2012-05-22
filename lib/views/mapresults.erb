@@ -32,11 +32,20 @@ function init(){
 	var reports = [ ];
 <% if @reports %>
     <% @reports.each do |report| %>
-	reports.push([ <%= report.latlng[0].to_s() + "," + report.latlng[1].to_s() + ",'" + report.response.join(',') + "'" %> ]);
+	reports.push([ <%= report.latlng[0].to_s() + "," + report.latlng[1].to_s() + ",'" + report.response.join(',') + "'," + report.area %> ]);
     <% end %>
 <% end %>
+	var minlat = 180;
+	var maxlat = -180;
+	var minlng = 180;
+	var maxlng = -180;
 	for(var r=0;r<reports.length;r++){
 		var marker;
+		minlat = Math.min( minlat, reports[r][0] );
+		maxlat = Math.max( maxlat, reports[r][0] );
+		minlng = Math.min( minlng, reports[r][1] );
+		maxlng = Math.max( maxlng, reports[r][1] );
+
 		if(reports[r][2].indexOf("other") > -1){
 			// unusual area!
 			marker = new google.maps.Marker({
@@ -53,11 +62,13 @@ function init(){
       	}
 		bindWindow(marker, reports[r]);
 	}
+	map.fitBounds( new google.maps.LatLngBounds( new google.maps.LatLng(minlat,minlng), new google.maps.LatLng(maxlat,maxlng) ) );
 }
 function bindWindow(mapmrk, datamrk){
 	google.maps.event.addListener(mapmrk, 'click', function() {
-		infoWindow.setContent("<h3>" + datamrk[0] + "," + datamrk[1] + "</h3>" + datamrk[2]);
-		infoWindow.open(map, mapmrk);
+		//infoWindow.setContent("<h3>" + datamrk[0] + "," + datamrk[1] + "</h3>" + datamrk[2]);
+		//infoWindow.open(map, mapmrk);
+		$("arealink").innerHTML = "<a href='/mapresults?map=broadband3&area=" + datamrk[3] + "'>See all from Area " + datamrk[3] + "</a>";
 		if(datamrk[2].indexOf("other") == -1){
 			// show type of area
 			$("readout").innerHTML = datamrk[2].split(',')[0];
@@ -106,6 +117,8 @@ html, body {
 			Click a report for votes.
 			<hr/>
 			<div id="readout">
+			</div>
+			<div id="arealink">
 			</div>
 			<hr/>
 			<a id="perma" href="http://bbandxplor.herokuapp.com/broadband3">Link to this View</a>
