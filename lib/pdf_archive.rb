@@ -65,6 +65,10 @@ get '/broadband3' do
   erb :broadband3
 end
 
+get '/macon' do
+  erb :macon
+end
+
 get '/foodband' do
   erb :broadband4
 end

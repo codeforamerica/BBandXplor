@@ -68,7 +68,7 @@ function bindWindow(mapmrk, datamrk){
 	google.maps.event.addListener(mapmrk, 'click', function() {
 		//infoWindow.setContent("<h3>" + datamrk[0] + "," + datamrk[1] + "</h3>" + datamrk[2]);
 		//infoWindow.open(map, mapmrk);
-		$("arealink").innerHTML = "<a href='/mapresults?map=broadband3&area=" + datamrk[3] + "'>See all from Area " + datamrk[3] + "</a>";
+		$("arealink").innerHTML = "<a href='/mapresults?map=" + gup("map") + "&area=" + datamrk[3] + "'>See all from Area " + datamrk[3] + "</a>";
 		if(datamrk[2].indexOf("other") == -1){
 			// show type of area
 			$("readout").innerHTML = datamrk[2].split(',')[0];
@@ -84,7 +84,7 @@ function updatePerma(){
 	var lng = map.getCenter().lng();
 	var zoom = map.getZoom();
 	var lyrs = [ ];
-	$("perma").href = "http://bbandxplor.herokuapp.com/broadband3?lat=" + lat + "&lng=" + lng + "&z=" + zoom + "&lyrs=" + lyrs.join(',');
+	$("perma").href = "/mapresults?map=" + gup("map") + "&area=" + gup("area") + "lat=" + lat + "&lng=" + lng + "&z=" + zoom + "&lyrs=" + lyrs.join(',');
 }
 function gup(nm){nm=nm.replace(/[\[]/,"\[").replace(/[\]]/,"\]");var rxS="[\?&]"+nm+"=([^&#]*)";var rx=new RegExp(rxS);var rs=rx.exec(window.location.href);if(!rs){return null;}else{return rs[1];}}
 function $(id){
@@ -121,7 +121,7 @@ html, body {
 			<div id="arealink">
 			</div>
 			<hr/>
-			<a id="perma" href="http://bbandxplor.herokuapp.com/broadband3">Link to this View</a>
+			<a id="perma" href="http://bbandxplor.herokuapp.com/mapresults">Link to this View</a>
 			<br/>
 			<small>Data from <a href="http://www.broadbandmap.gov/summarize/state/georgia/county/bibb">BroadbandMap.gov</a><br/>
 			US Dept of Commerce, NTIA, State Broadband Initiative (Jun 2011)</small>
