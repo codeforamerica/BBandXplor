@@ -70,7 +70,11 @@ get '/foodband' do
 end
 
 get '/poll' do
-  @reports = SVReport.all( :hostmap => params['map'] )
+  if params['area']
+    @reports = SVReport.all( :hostmap => params['map'], :area => params['area'] )  
+  else
+    @reports = SVReport.all( :hostmap => params['map'] )
+  end
   erb :poll
 end
 
