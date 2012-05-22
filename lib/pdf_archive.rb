@@ -78,6 +78,15 @@ get '/poll' do
   erb :poll
 end
 
+get '/mapresults' do
+  if params['area']
+    @reports = SVReport.all( :hostmap => params['map'], :area => params['area'] )  
+  else
+    @reports = SVReport.all( :hostmap => params['map'] )
+  end
+  erb :mapresults
+end
+
 get '/store' do
   # accept AJAX post
   qualreport = SVReport.create({

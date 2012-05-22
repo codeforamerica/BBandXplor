@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>BBandXplor: Reports Map</title>
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=geometry"></script>
+		<script type="text/javascript">
+var map, infoWindow, markers, providers, checkdiv, viewholes, oldHole;
+function init(){
+	var ctr = new google.maps.LatLng(32.834164,-83.624952);
+	var z = 12;
+	if(gup("lat")){
+		ctr = new google.maps.LatLng(1 * gup("lat"), 1 * gup("lng"));
+		z = 1 * gup("z");
+	}
+	var mapOptions = {
+		center: ctr,
+		zoom: z,
+		mapTypeId: google.maps.MapTypeId.SATELLITE
+	};
+	map = new google.maps.Map($("map_canvas"), mapOptions);
+
+	infoWindow = new google.maps.InfoWindow({ maxWidth: 350 });
+	google.maps.event.addListener(map, 'click', function() {
+		infoWindow.close();
+	});
+	
+	google.maps.event.addListener(map, 'bounds_changed', function() {
+		updatePerma();
+	});
+
+	var reports = [ ];
+<% if @reports %>
+    <% @reports.each do |report| %>
+	reports.push(<%= report.latlng[0].to_s() + "," + report.latlng[1].to_s() + ",'" + report.response + "'" %>);
+    <% end %>
+<% end %>
+	for(var r=0;r<reports.length;r++){
+		var marker = new google.maps.Marker({
+ 			position: new google.maps.LatLng( reports[r][0], reports[r][1] ),
+      		map: map,
+      		title: reports[r][2]
+      	});
+	}
+}
+function updatePerma(){
+	var lat = map.getCenter().lat();
+	var lng = map.getCenter().lng();
+	var zoom = map.getZoom();
+	var lyrs = [ ];
+	$("perma").href = "http://bbandxplor.herokuapp.com/broadband3?lat=" + lat + "&lng=" + lng + "&z=" + zoom + "&lyrs=" + lyrs.join(',');
+}
+function gup(nm){nm=nm.replace(/[\[]/,"\[").replace(/[\]]/,"\]");var rxS="[\?&]"+nm+"=([^&#]*)";var rx=new RegExp(rxS);var rs=rx.exec(window.location.href);if(!rs){return null;}else{return rs[1];}}
+function $(id){
+	return document.getElementById(id);
+}
+		</script>
+		<style type="text/css">
+html, body {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	font-family: georgia, arial, serif;
+}
+#sidebar {
+	float: left;
+	width: 19%;
+	height: 100%;
+}
+#map_canvas {
+	float: left;
+	width: 80%;
+	height: 100%;
+}
+		</style>
+	</head>
+	<body onload="init()">
+		<div id="sidebar">
+			<h3>Results on Holes</h3>
+			Click a report for votes.
+			<hr/>
+			<a id="perma" href="http://bbandxplor.herokuapp.com/broadband3">Link to this View</a>
+			<br/>
+			<small>Data from <a href="http://www.broadbandmap.gov/summarize/state/georgia/county/bibb">BroadbandMap.gov</a><br/>
+			US Dept of Commerce, NTIA, State Broadband Initiative (Jun 2011)</small>
+		</div>
+		<div id="map_canvas">
+		</div>
+	</body>
+</html>
