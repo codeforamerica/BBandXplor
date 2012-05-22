@@ -5,7 +5,7 @@
 		<title>BBandXplor: Food Deserts</title>
 		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=geometry"></script>
 		<script type="text/javascript">
-var map, infoWindow, markers, providers, checkdiv, viewholes, oldHole;
+var map, infoWindow, markers, providers, checkdiv, viewholes, oldHole, activeArea;
 function init(){
 	// set up Google Maps, pointed at Terminal Station, Macon, GA
 	var ctr = new google.maps.LatLng(32.834164,-83.624952);
@@ -125,6 +125,7 @@ function findSView(){
 		ll = new google.maps.LatLng(lat,lng);
 		for(var h=0; h<viewholes.length; h++){
 			if(google.maps.geometry.poly.containsLocation( ll, viewholes[h] )){
+				activeArea = h;
 				foundHole = viewholes[h];
 				if(oldHole){
 					oldHole.setMap(null);
@@ -208,19 +209,19 @@ label {
 			<h3>Crowdsource</h3>
 			<b>Is this area a...</b>
 			<label>
-				<input type="radio" name="stereotype"/>
+				<input type="radio" name="stereotype" value="highway"/>
 				Highway
 			</label>
 			<label>
-				<input type="radio" name="stereotype"/>
+				<input type="radio" name="stereotype" value="industrial"/>
 				Industrial Area
 			</label>
 			<label>
-				<input type="radio" name="stereotype"/>
+				<input type="radio" name="stereotype" value="park_or_pond"/>
 				Park or Pond
 			</label>
 			<label>
-				<input type="radio" name="stereotype"/>
+				<input type="radio" name="stereotype" value="other"/>
 				Other
 			</label>
 			<br/>
@@ -228,29 +229,29 @@ label {
 			<br/>
 			<b>Is there vacant land?</b><br/>
 			<label>
-				<input type="radio" name="vacant"/>
+				<input type="radio" name="vacant" value="yes"/>
 				Yes
 			</label>
 			<label>
-				<input type="radio" name="vacant"/>
+				<input type="radio" name="vacant" value="no"/>
 				No
 			</label>
 			<b>Are there places to park?</b><br/>
 			<label>
-				<input type="radio" name="parking"/>
+				<input type="radio" name="parking" value="yes"/>
 				Yes
 			</label>
 			<label>
-				<input type="radio" name="parking"/>
+				<input type="radio" name="parking" value="no"/>
 				No
 			</label>
 			<b>Are there unkempt buildings?</b><br/>
 			<label>
-				<input type="radio" name="abandoned"/>
+				<input type="radio" name="abandoned" value="yes"/>
 				Yes
 			</label>
 			<label>
-				<input type="radio" name="abandoned"/>
+				<input type="radio" name="abandoned" value="no"/>
 				No
 			</label>
 			<br/>

@@ -4630,7 +4630,7 @@ function encodeResponse(){
   return coded.join(";")
 }
 function getCheckedValue(radioName) {
-  var radioObj = document.getElementsByClassName(radioName);
+  var radioObj = document.getElementsByName(radioName);
   var radioLength = radioObj.length;
   for(var i = 0; i < radioLength; i++) {
 	if(radioObj[i].checked) {
@@ -4729,25 +4729,25 @@ html, body {
 			<input id="svsearch" type="button" value="Search" onclick="findSView()"/>
 			<h3>Crowdsource the Gaps</h3>
 			<b>Is this a...</b><br/>
-			<input type="radio" name="stereotype"/> Highway<br/>
-			<input type="radio" name="stereotype"/> Railway<br/>
-			<input type="radio" name="stereotype"/> Industrial Area<br/>
-			<input type="radio" name="stereotype"/> Park or Pond<br/>
-			<input type="radio" name="stereotype"/> Other
+			<input type="radio" name="stereotype" value="highway"/> Highway<br/>
+			<input type="radio" name="stereotype" value="railway"/> Railway<br/>
+			<input type="radio" name="stereotype" value="industrial"/> Industrial Area<br/>
+			<input type="radio" name="stereotype" value="park_or_pond"/> Park or Pond<br/>
+			<input type="radio" name="stereotype" value="other"/> Other
 			<br/><br/>
 			If <b>Other</b>, please describe:
 			<br/><br/>
 			<b>Are there residences?</b><br/>
-			<input type="radio" name="houses"/> Yes
-			<input type="radio" name="houses"/> No
+			<input type="radio" name="houses" value="yes"/> Yes
+			<input type="radio" name="houses" value="no"/> No
 			<br/>
 			<b>Are there businesses?</b><br/>
-			<input type="radio" name="businesses"/> Yes
-			<input type="radio" name="businesses"/> No
+			<input type="radio" name="businesses" value="yes"/> Yes
+			<input type="radio" name="businesses" value="no"/> No
 			<br/>
 			<b>Are there unkempt buildings?</b><br/>
-			<input type="radio" name="abandoned"/> Yes
-			<input type="radio" name="abandoned"/> No
+			<input type="radio" name="abandoned" value="yes"/> Yes
+			<input type="radio" name="abandoned" value="no"/> No
 			<br/>
 			<input type="button" value="Submit" onclick="sendAndNext()"/>
 			<hr/>
