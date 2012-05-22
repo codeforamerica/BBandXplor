@@ -950,25 +950,25 @@ html, body {
 			<input id="svsearch" type="button" value="Search" onclick="findSView()"/>
 			<h3>Crowdsource the Gaps</h3>
 			<b>Is this a...</b><br/>
-			<input type="radio" name="stereotype"/> Highway<br/>
-			<input type="radio" name="stereotype"/> Trailer Park<br/>
-			<input type="radio" name="stereotype"/> Industrial Park<br/>
-			<input type="radio" name="stereotype"/> Pond or Field<br/>
-			<input type="radio" name="stereotype"/> Other
+			<input type="radio" name="stereotype" value="highway"/> Highway<br/>
+			<input type="radio" name="stereotype" value="trailer"/> Trailer Park<br/>
+			<input type="radio" name="stereotype" value="industrial"/> Industrial Park<br/>
+			<input type="radio" name="stereotype" value="pond_or_field"/> Pond or Field<br/>
+			<input type="radio" name="stereotype" value="other"/> Other
 			<br/><br/>
 			If <b>Other</b>, please describe:
 			<br/><br/>
 			<b>Are there residences?</b><br/>
-			<input type="radio" name="houses"/> Yes
-			<input type="radio" name="houses"/> No
+			<input type="radio" name="houses" value="yes"/> Yes
+			<input type="radio" name="houses" value="no"/> No
 			<br/>
 			<b>Are there businesses?</b><br/>
-			<input type="radio" name="businesses"/> Yes
-			<input type="radio" name="businesses"/> No
+			<input type="radio" name="businesses" value="yes"/> Yes
+			<input type="radio" name="businesses" value="no"/> No
 			<br/>
 			<b>Are there unkempt buildings?</b><br/>
-			<input type="radio" name="abandoned"/> Yes
-			<input type="radio" name="abandoned"/> No
+			<input type="radio" name="abandoned" value="yes"/> Yes
+			<input type="radio" name="abandoned" value="no"/> No
 			<br/>
 			<input type="button" value="Submit" onclick="sendAndNext()"/>
 			<hr/>
