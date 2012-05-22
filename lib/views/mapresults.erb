@@ -36,12 +36,29 @@ function init(){
     <% end %>
 <% end %>
 	for(var r=0;r<reports.length;r++){
-		var marker = new google.maps.Marker({
- 			position: new google.maps.LatLng( reports[r][0], reports[r][1] ),
-      		map: map,
-      		title: reports[r][2]
-      	});
+		var marker;
+		if(reports[r][2].indexOf("other") > -1){
+			// unusual area!
+			marker = new google.maps.Marker({
+ 				position: new google.maps.LatLng( reports[r][0], reports[r][1] ),
+      			map: map,
+      			icon: "http://google-maps-icons.googlecode.com/files/expert.png"
+      		});
+		}
+		else{
+			marker = new google.maps.Marker({
+ 				position: new google.maps.LatLng( reports[r][0], reports[r][1] ),
+      			map: map
+      		});
+      	}
+		bindWindow(marker, reports[r]);
 	}
+}
+function bindWindow(mapmrk, datamrk){
+	google.maps.event.addListener(mapmrk, 'click', function() {
+		infoWindow.setContent("<h3>" + datamrk[0] + "," + datamrk[1] + "</h3>" + datamrk[2]);
+		infoWindow.open(map, mapmrk);
+	});
 }
 function updatePerma(){
 	var lat = map.getCenter().lat();
