@@ -94,7 +94,7 @@ get '/store' do
     :hostmap => params["survey"],
     :area => params["area"],
     :latlng => [ params["lat"].to_f, params["lng"].to_f ],
-    :response => [ params["rep"].split('-')[0], params["rep"].split('-')[1] ]
+    :response => params["rep"].split('-')
   })
   #Qu.enqueue(ProcessSVReport, qualreport.id)
 end
