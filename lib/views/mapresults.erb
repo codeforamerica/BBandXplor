@@ -889,7 +889,7 @@ function updatePerma(){
 	if(gup("area") && gup("area").length > 0){
 		areathing = "&area=" + gup("area");
 	}
-	$("perma").href = "/mapresults?map=" + gup("map") + areathing + "lat=" + lat + "&lng=" + lng + "&z=" + zoom + "&lyrs=" + lyrs.join(',');
+	$("perma").href = "/mapresults?map=" + gup("map") + areathing + "&lat=" + lat + "&lng=" + lng + "&z=" + zoom + "&lyrs=" + lyrs.join(',');
 }
 function gup(nm){nm=nm.replace(/[\[]/,"\[").replace(/[\]]/,"\]");var rxS="[\?&]"+nm+"=([^&#]*)";var rx=new RegExp(rxS);var rs=rx.exec(window.location.href);if(!rs){return null;}else{return rs[1];}}
 function $(id){
