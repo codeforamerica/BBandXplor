@@ -32,7 +32,7 @@ function init(){
 	var reports = [ ];
 <% if @reports %>
     <% @reports.each do |report| %>
-	reports.push(<%= report.latlng[0].to_s() + "," + report.latlng[1].to_s() + ",'" + report.response + "'" %>);
+	reports.push(<%= report.latlng[0].to_s() + "," + report.latlng[1].to_s() + ",'" + report.response.join(',') + "'" %>);
     <% end %>
 <% end %>
 	for(var r=0;r<reports.length;r++){
