@@ -58,6 +58,14 @@ function bindWindow(mapmrk, datamrk){
 	google.maps.event.addListener(mapmrk, 'click', function() {
 		infoWindow.setContent("<h3>" + datamrk[0] + "," + datamrk[1] + "</h3>" + datamrk[2]);
 		infoWindow.open(map, mapmrk);
+		if(datamrk[2].indexOf("other") == -1){
+			// show type of area
+			$("readout").innerHTML = datamrk[2].split(',')[0];
+		}
+		else{
+			// show responses on this area
+			$("readout").innerHTML = "Interest Area<br/>Are there residences? " + datamrk[2].split(",")[1] + "<br/>Are there businesses? " + datamrk[2].split(",")[2] + "<br/>Are there unkempt buildings? " + datamrk[2].split(",")[3];
+		}
 	});
 }
 function updatePerma(){
@@ -96,6 +104,9 @@ html, body {
 		<div id="sidebar">
 			<h3>Results on Holes</h3>
 			Click a report for votes.
+			<hr/>
+			<div id="readout">
+			</div>
 			<hr/>
 			<a id="perma" href="http://bbandxplor.herokuapp.com/broadband3">Link to this View</a>
 			<br/>
