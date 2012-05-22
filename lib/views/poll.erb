@@ -1,0 +1,14 @@
+<h1>SV Reports</h1>
+
+<% if @reports %>
+  <h2>Reports on this Map</h2>
+  <ul>
+    <% @reports.each do |report| %>
+      <li>
+        Report from area <%= report.area %>
+      	<br/>
+      	<%= report.latlng[0] + "," + report.latlng[1] %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

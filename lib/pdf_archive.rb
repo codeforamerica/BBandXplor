@@ -69,6 +69,11 @@ get '/foodband' do
   erb :broadband4
 end
 
+get '/poll' do
+  @reports = SVReport.all( :hostmap => params['map'] )
+  erb :poll
+end
+
 get '/store' do
   # accept AJAX post
   qualreport = SVReport.create({
@@ -82,10 +87,5 @@ get '/store' do
 end
 
 get '/' do
-  erb :home
-end
-
-get '/search' do
-  @documents = Document.search(params['q'])
   erb :home
 end
