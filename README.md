@@ -61,7 +61,11 @@ var config = {
 	latitude: 42.992124,
 	longitude: -71.448266,
 	zoom: 13,
-	city: "Manchester"
+	city: "Manchester",
+	latmin: 42.943387,
+	latmax: 43.023758,
+	lngmin: -71.49478,
+	lngmax: -71.379773
 };
 </code>
 

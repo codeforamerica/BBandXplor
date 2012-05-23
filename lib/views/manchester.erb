@@ -10,7 +10,11 @@ var config = {
 	latitude: 42.992124,
 	longitude: -71.448266,
 	zoom: 13,
-	city: "Manchester"
+	city: "Manchester",
+	latmin: 42.943387,
+	latmax: 43.023758,
+	lngmin: -71.49478,
+	lngmax: -71.379773
 };
 		
 var map, infoWindow, markers, providers, checkdiv, viewholes, oldHole, activeArea;
@@ -68,8 +72,8 @@ function findSView(){
 	var foundHole = null;
 	var lat, lng, ll;
 	while(!foundHole){
-		lat = Math.random() * (43.023758 - 42.943387) + 42.943387;
-		lng = Math.random() * (-71.379773 + 71.49478) - 71.49478;
+		lat = Math.random() * (config.latmax - config.latmin) + config.latmin;
+		lng = Math.random() * (config.lngmax - config.lngmin) + config.lngmin;
 		ll = new google.maps.LatLng(lat,lng);
 		for(var h=0; h<viewholes.length; h++){
 			if(google.maps.geometry.poly.containsLocation( ll, viewholes[h] )){
