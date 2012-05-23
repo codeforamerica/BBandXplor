@@ -11,39 +11,41 @@ The server-side codebase is a Ruby on Rails app designed for hosting on Heroku.
 
 ## Working with BroadbandMap.gov
 
-===Shapefiles===
+###Shapefiles
 * Scroll down on the [http://www.broadbandmap.gov/data-download Data Download] page until you see your state.  Click the download on the right column to download SHP shapefiles.
 * The download is a zip archive containing at least three other zip archives. Open each of these to expose state-level data on wireless and terrestrial broadband.
 * Search for a shapefile with the city or county limits from the Census TIGER maps
 
-'''Viewing Shapefiles'''
-* Install [http://qgis.org QGIS] to view and edit shapefiles.
+<strong>Viewing Shapefiles</strong>
+* Install <a href="http://qgis.org">QGIS</a> to view and edit shapefiles.
 * In QGIS, select Layer... Add Vector Layer.  For Dataset, choose your city or county limits. The system should automatically set the view to see the entire shape.
 * Now select Layer... Add Vector Layer for one of your broadband shapefiles. These are usually wireless, terrestrial, and road-lining connections across the entire state.
 
-'''Selecting Geodata''' - to save processing time, reduce the size of the file before running the Clip operation.
-* On QGIS's picture menu bar, click the '''>>''' to the right of a mouse cursor to see different options for mouse movement. Select the top middle, which shows selecting features by rectangle.
+<strong>Selecting Geodata</strong> - to save processing time, reduce the size of the file before running the Clip operation.
+* On QGIS's picture menu bar, click the <strong>>><strong> to the right of a mouse cursor to see different options for mouse movement. Select the top middle, which shows selecting features by rectangle.
 * Click and drag from one corner of the screen to the opposite end. Release to select only layers which overlap with your city or county.
 * Now click Layer... Save selected as... and save as an Esri Shapefile with the name City_BBand_Select.
 * Remove the statewide layer and use Layer... Add Vector Layer to add the City_BBand_Select layer.
 
-'''Clipping Geodata''' - cut the boundaries of the area to your city or county boundaries
+<strong>Clipping Geodata</strong> - cut the boundaries of the area to your city or county boundaries
 * Click Vector... Geoprocessing Tools... Clip to open the clip menu. Set Input Vector to City_BBand_Select and Clip Layer to the city or county limits.  Use Browse to select a name such as City_BBand_Clip as the name for the shapefile.
 * Click OK and wait (up to several minutes) while the Clip operation runs.
 
-'''Dividing into Polygons'''
+<strong>Dividing into Polygons</strong>
 * The output shapefile is a mix of different ISPs. From the Vector menu, select Data Management Tools > Split Vector Layer
 * Select your clipped broadband layer as the Input Vector and DBANAME as the Unique ID Field.
 * For output file, create a new folder and select it with the file tool. Click OK to create the layers.
 * Add the shapefile layers to the map - they will have names such as City_BBand_Clip_DBANAME__ISP NAME.shp.
 
-'''Saving as Google Earth KML'''
+<strong>Saving as Google Earth KML</strong>
 * You can right-click each layer in the QGIS menu and save it as a KML file, to view them in Google Earth
 
-'''Extracting Holes'''
+<strong>Extracting Holes</strong>
 * Run the included findholes.py script to create KML and JavaScript files
 
 <code>python findholes.py SOURCE_FILE.kml OUTPUT_NAME</code>
+
+* OUTPUT_NAME.kml is a file you can open in Google Earth and other mapping applications
 
 * OUTPUT_NAME.js is a script which adds coordinates of all of the holes to an array. Attach it to macon.erb or other template
 
