@@ -56,24 +56,22 @@ Make these changes to manchester.erb
 
 * Change the config object
 
-<code>
-var config = {
-	latitude: 42.992124,
-	longitude: -71.448266,
-	zoom: 13,
-	city: "Manchester",
-	latmin: 42.943387,
-	latmax: 43.023758,
-	lngmin: -71.49478,
-	lngmax: -71.379773
-};
-</code>
+    var config = {
+	    latitude: 42.992124,
+	    longitude: -71.448266,
+	    zoom: 13,
+	    city: "Manchester",
+	    latmin: 42.943387,
+	    latmax: 43.023758,
+	    lngmin: -71.49478,
+	    lngmax: -71.379773
+    };
 
 Add your city to pdf_archive.rb. Using Honolulu as an example:
 
-<code>get '/honolulu' do
-  erb :honolulu
-end</code>
+    get '/honolulu' do
+      erb :honolulu
+    end
 
 ## Setup
 
