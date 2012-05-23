@@ -175,18 +175,24 @@ html, body {
 	</head>
 	<body onload="init()">
 		<div id="sidebar">
-			<h3>Find Holes</h3>
-			<input id="svsearch" type="button" value="Search" onclick="findSView()"/>
 			<h3>Crowdsource the Gaps</h3>
-			<b>Are there houses?</b><br/>
+			<input id="svsearch" type="button" value="Search" onclick="findSView()"/>
+			<p>
+				You are looking at a broadband dead zone - an area where your neighbors could
+				have high-speed internet but your house might not be able to connect.
+				<br/>
+				Answer simple questions to help more people get online.
+			</p>
+			<strong>Are there houses?</strong><br/>
 			<input type="radio" name="houses" value="yes"/> Yes
 			<input type="radio" name="houses" value="no"/> No
-			<br/>
-			<b>Are there businesses?</b><br/>
+			<br/><br/>
+			<strong>Are there businesses?</strong><br/>
 			<input type="radio" name="businesses" value="yes"/> Yes
 			<input type="radio" name="businesses" value="no"/> No
-			<br/>
+			<br/><br/>
 			<input type="button" value="Submit" onclick="sendAndNext()"/>
+			<br/>
 			<hr/>
 			<a id="perma" href="http://bbandxplor.herokuapp.com">Link to this View</a>
 			<br/>
