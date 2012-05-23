@@ -69,6 +69,10 @@ get '/macon' do
   erb :macon
 end
 
+get '/manchester' do
+  erb :manchester
+end
+
 get '/foodband' do
   erb :broadband4
 end

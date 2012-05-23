@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+		<title>Where's my Broadband?</title>
+		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=geometry"></script>
+		<script type="text/javascript" src="manchester.js"></script>
+		<script type="text/javascript">
+var map, infoWindow, markers, providers, checkdiv, viewholes, oldHole, activeArea;
+function init(){
+	var ctr = new google.maps.LatLng(42.992124,-71.448266);
+	var z = 13;
+	if(gup("lat")){
+		ctr = new google.maps.LatLng(1 * gup("lat"), 1 * gup("lng"));
+		z = 1 * gup("z");
+	}
+	var mapOptions = {
+		center: ctr,
+		zoom: z,
+		mapTypeId: google.maps.MapTypeId.SATELLITE
+	};
+	map = new google.maps.Map($("map_canvas"), mapOptions);
+
+	infoWindow = new google.maps.InfoWindow({ maxWidth: 350 });
+	google.maps.event.addListener(map, 'click', function() {
+		infoWindow.close();
+	});
+	
+	google.maps.event.addListener(map, 'bounds_changed', function() {
+		updatePerma();
+	});
+	
+	checkdiv = document.createElement("div");
+	checkdiv.innerHTML = "&check;";
+	
+    viewholes = [ ];
+    
+    loadHoles(viewholes);
+    
+	for(var h=0; h<viewholes.length; h++){
+		for(var pt=0;pt<viewholes[h].length; pt++){
+			viewholes[h][pt] = new google.maps.LatLng(viewholes[h][pt][1], viewholes[h][pt][0] );
+		}
+		hole = new google.maps.Polygon({
+			paths: viewholes[h],
+			strokeColor: "#0000FF",
+			strokeOpacity: 0.8,
+			strokeWeight: 2,
+			fillColor: "#0000FF",
+			fillOpacity: 0.15
+		});
+		//hole.setMap(map);
+		viewholes[h] = hole;
+	}
+	if(!gup("lat")){
+		findSView();
+	}
+}
+function findSView(){
+	document.getElementById("svsearch").disabled = true;
+	var foundHole = null;
+	var lat, lng, ll;
+	while(!foundHole){
+		lat = Math.random() * (43.023758 - 42.943387) + 42.943387;
+		lng = Math.random() * (-71.379773 + 71.49478) - 71.49478;
+		ll = new google.maps.LatLng(lat,lng);
+		for(var h=0; h<viewholes.length; h++){
+			if(google.maps.geometry.poly.containsLocation( ll, viewholes[h] )){
+				activeArea = h;
+				foundHole = viewholes[h];
+				if(oldHole){
+					oldHole.setMap(null);
+				}
+				oldHole = foundHole;
+				foundHole.setMap(map);
+				break;
+			}
+		}
+	}
+	map.setCenter(ll);
+	map.setZoom(17);
+	updatePerma();
+	var pov = {
+	    heading: 34,
+	    pitch: 10,
+	    zoom: 0
+	  };
+	var panorama = map.getStreetView();
+	panorama.setPosition(ll);
+	panorama.setPov(pov);
+	panorama.setVisible(true);
+	document.getElementById("svsearch").disabled = false;
+}
+function bindWindow(mapmrk, datamrk){
+	google.maps.event.addListener(mapmrk, 'click', function() {
+		infoWindow.setContent("<h3>" + datamrk.name + "</h3>" + datamrk.details + "<hr/><a href='" + datamrk.link + "' target='_blank'>" + datamrk.link + "</a>");
+		infoWindow.open(map, mapmrk);
+	});
+}
+function encodeResponse(){
+  var coded = [getCheckedValue("houses")];
+  coded.push(getCheckedValue("businesses"));
+  return coded.join("-")
+}
+function getCheckedValue(radioName) {
+  var radioObj = document.getElementsByName(radioName);
+  var radioLength = radioObj.length;
+  for(var i = 0; i < radioLength; i++) {
+	if(radioObj[i].checked) {
+	  return radioObj[i].value;
+	}
+  }
+  return "";
+}
+function sendAndNext(){
+  var s = document.createElement("script");
+  s.type = "text/javascript";
+  s.src = "/store?survey=manchester&lat=" + map.getStreetView().getPosition().lat() + "&lng=" + map.getStreetView().getPosition().lng() + "&area=" + activeArea + "&rep=" + encodeResponse();
+  document.body.appendChild(s);
+  findSView();
+}
+function toggle(btn){
+	var setLayerOn = map;
+	if(btn.innerHTML.indexOf(checkdiv.innerHTML) > -1){
+		setLayerOn = null;
+		btn.innerHTML = btn.innerHTML.replace(checkdiv.innerHTML,'');
+	}
+	else{
+		btn.innerHTML = '&check;' + btn.innerHTML;
+	}
+	updatePerma();
+}
+function updatePerma(){
+	var lat = map.getCenter().lat();
+	var lng = map.getCenter().lng();
+	var zoom = map.getZoom();
+	var lyrs = [ ];
+	$("perma").href = "http://bbandxplor.herokuapp.com/manchester?lat=" + lat + "&lng=" + lng + "&z=" + zoom + "&lyrs=" + lyrs.join(',');
+}
+function gup(nm){nm=nm.replace(/[\[]/,"\[").replace(/[\]]/,"\]");var rxS="[\?&]"+nm+"=([^&#]*)";var rx=new RegExp(rxS);var rs=rx.exec(window.location.href);if(!rs){return null;}else{return rs[1];}}
+function $(id){
+	return document.getElementById(id);
+}
+		</script>
+		<style type="text/css">
+html, body {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	font-family: georgia, arial, serif;
+}
+#sidebar {
+	float: left;
+	width: 19%;
+	height: 100%;
+}
+#map_canvas {
+	float: left;
+	width: 80%;
+	height: 100%;
+}
+		</style>
+	</head>
+	<body onload="init()">
+		<div id="sidebar">
+			<h3>Find Holes</h3>
+			<input id="svsearch" type="button" value="Search" onclick="findSView()"/>
+			<h3>Crowdsource the Gaps</h3>
+			<b>Are there houses?</b><br/>
+			<input type="radio" name="houses" value="yes"/> Yes
+			<input type="radio" name="houses" value="no"/> No
+			<br/>
+			<b>Are there businesses?</b><br/>
+			<input type="radio" name="businesses" value="yes"/> Yes
+			<input type="radio" name="businesses" value="no"/> No
+			<br/>
+			<input type="button" value="Submit" onclick="sendAndNext()"/>
+			<hr/>
+			<a id="perma" href="http://bbandxplor.herokuapp.com/manchester">Link to this View</a>
+			<br/>
+			<small>Data from <a href="http://www.broadbandmap.gov/summarize/state/georgia/county/bibb">BroadbandMap.gov</a><br/>
+			US Dept of Commerce, NTIA, State Broadband Initiative (Jun 2011)</small>
+		</div>
+		<div id="map_canvas">
+		</div>
+	</body>
+</html>
