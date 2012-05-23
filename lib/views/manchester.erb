@@ -5,7 +5,6 @@
 		<title>Where's my Broadband?</title>
 		<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=geometry"></script>
 		<script type="text/javascript" src="manchester.js"></script>
-		<link href='http://fonts.googleapis.com/css?family=Macondo' rel='stylesheet' type='text/css'>
 		<script type="text/javascript">
 var config = {
 	latitude: 42.992124,
@@ -161,13 +160,11 @@ html, body {
 	/* font-family: georgia, arial, serif; */
 	font-family: helvetica, sans-serif;
 }
-.macon{
-	font-family: 'Macondo', cursive;
-}
 #sidebar {
 	float: left;
 	width: 19%;
 	height: 100%;
+	padding: 4px;
 }
 #map_canvas {
 	float: left;
@@ -186,7 +183,7 @@ html, body {
 	</head>
 	<body onload="init()">
 		<div id="sidebar">
-			<h3 class="macon">BBandXplor</h3>
+			<h2 style="font-weight:bold;">BBandXplor</h2>
 			<p>
 				You are looking inside a broadband dead zone - an area only a few blocks
 				away from high-speed internet access. Most of these areas are empty, but
