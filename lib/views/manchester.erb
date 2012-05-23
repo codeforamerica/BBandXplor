@@ -173,8 +173,8 @@ html, body {
 	height: 100%;
 }
 .newbutton {
-	background-color: #A3C1CC;
-	color: #555;
+	background-color: #CCC1A3;
+	color: #000;
 	font-size: 14px;
 	font-weight: bold;
 	padding: 6px 10px;
@@ -184,19 +184,20 @@ html, body {
 	</head>
 	<body onload="init()">
 		<div id="sidebar">
-			<h3>BBandXplor</h3>
+			<h3 style="font-family:georgia serif;">BBandXplor</h3>
 			<p>
 				You are looking inside a broadband dead zone - an area only a few blocks
 				away from high-speed internet access. Most of these areas are empty, but
 				there are exceptions.
-				<br/>
-				Describe this area to help more people get online.
+			</p>
+			<p>
+				Describe this area to help more people get online:
 			</p>
 			<strong>Are there houses?</strong><br/>
-			<input type="radio" name="houses" value="yes"/> Yes <input type="radio" name="houses" value="no"/> No
+			<input type="radio" name="houses" value="yes"/> Yes &nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" name="houses" value="no"/> No
 			<br/><br/>
 			<strong>Are there businesses?</strong><br/>
-			<input type="radio" name="businesses" value="yes"/> Yes <input type="radio" name="businesses" value="no"/> No
+			<input type="radio" name="businesses" value="yes"/> Yes &nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" name="businesses" value="no"/> No
 			<br/><br/>
 			<input type="button" class="newbutton" value="Submit" onclick="sendAndNext()"/>
 			<br/>
