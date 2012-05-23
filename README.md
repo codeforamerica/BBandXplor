@@ -49,6 +49,27 @@ The server-side codebase is a Ruby on Rails app designed for hosting on Heroku.
 
 * OUTPUT_NAME.js is a script which adds coordinates of all of the holes to an array. Attach it to macon.erb or other template
 
+<strong>Forking Manchester</strong>
+Make these changes to manchester.erb
+
+* Replace manchester.js with the URL of your generated JavaScript file.
+
+* Change the config object
+
+<code>
+var config = {
+	latitude: 42.992124,
+	longitude: -71.448266,
+	zoom: 13,
+	city: "Manchester"
+};
+</code>
+
+Add your city to pdf_archive.rb. Using Honolulu as an example:
+
+<code>get '/honolulu' do
+  erb :honolulu
+end</code>
 
 ## Setup
 
