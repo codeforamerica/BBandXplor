@@ -159,7 +159,8 @@ html, body {
 	width: 100%;
 	margin: 0;
 	padding: 0;
-	font-family: georgia, arial, serif;
+	/* font-family: georgia, arial, serif; */
+	font-family: helvetica, sans-serif;
 }
 #sidebar {
 	float: left;
@@ -171,27 +172,33 @@ html, body {
 	width: 80%;
 	height: 100%;
 }
+.newbutton {
+	background-color: #A3C1CC;
+	color: #555;
+	font-size: 14px;
+	font-weight: bold;
+	padding: 6px 10px;
+	text-shadow: 1px 1px 0 #DDD;
+}
 		</style>
 	</head>
 	<body onload="init()">
 		<div id="sidebar">
-			<h3>Crowdsource the Gaps</h3>
-			<input id="svsearch" type="button" value="Search" onclick="findSView()"/>
+			<h3>BBandXplor</h3>
 			<p>
-				You are looking at a broadband dead zone - an area where your neighbors could
-				have high-speed internet but your house might not be able to connect.
+				You are looking inside a broadband dead zone - an area only a few blocks
+				away from high-speed internet access. Most of these areas are empty, but
+				there are exceptions.
 				<br/>
-				Answer simple questions to help more people get online.
+				Describe this area to help more people get online.
 			</p>
 			<strong>Are there houses?</strong><br/>
-			<input type="radio" name="houses" value="yes"/> Yes
-			<input type="radio" name="houses" value="no"/> No
+			<input type="radio" name="houses" value="yes"/> Yes <input type="radio" name="houses" value="no"/> No
 			<br/><br/>
 			<strong>Are there businesses?</strong><br/>
-			<input type="radio" name="businesses" value="yes"/> Yes
-			<input type="radio" name="businesses" value="no"/> No
+			<input type="radio" name="businesses" value="yes"/> Yes <input type="radio" name="businesses" value="no"/> No
 			<br/><br/>
-			<input type="button" value="Submit" onclick="sendAndNext()"/>
+			<input type="button" class="newbutton" value="Submit" onclick="sendAndNext()"/>
 			<br/>
 			<hr/>
 			<a id="perma" href="http://bbandxplor.herokuapp.com">Link to this View</a>
