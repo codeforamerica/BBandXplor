@@ -9,6 +9,10 @@ The same program could be used to explore food deserts and find locations suitab
 
 The server-side codebase is a Ruby on Rails app designed for hosting on Heroku.
 
+##Screenshots
+<img src="http://i.imgur.com/eozvR.png" width="250"/>
+<img src="http://i.imgur.com/HUMLk.png" width="250"/>
+
 ## Working with BroadbandMap.gov
 
 ###Shapefiles
