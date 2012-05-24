@@ -837,7 +837,6 @@ viewholes.push(
 	}
 }
 function findSView(){
-	document.getElementById("svsearch").disabled = true;
 	var foundHole = null;
 	var lat, lng, ll;
 	while(!foundHole){
@@ -869,7 +868,6 @@ function findSView(){
 	panorama.setPosition(ll);
 	panorama.setPov(pov);
 	panorama.setVisible(true);
-	document.getElementById("svsearch").disabled = false;
 }
 function bindWindow(mapmrk, datamrk){
 	google.maps.event.addListener(mapmrk, 'click', function() {
