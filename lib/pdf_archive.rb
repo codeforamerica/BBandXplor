@@ -108,5 +108,5 @@ get '/store' do
 end
 
 get '/' do
-  erb :home
+  erb :macon
 end
