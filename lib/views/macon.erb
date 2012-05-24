@@ -819,7 +819,7 @@ viewholes.push(
 );
 	for(var h=0; h<viewholes.length; h++){
 		for(var pt=0;pt<viewholes[h].length; pt++){
-			viewholes[h][pt] = new google.maps.LatLng(viewholes[h][pt][1], viewholes[h][pt][] );
+			viewholes[h][pt] = new google.maps.LatLng(viewholes[h][pt][1], viewholes[h][pt][0] );
 		}
 		hole = new google.maps.Polygon({
 			paths: viewholes[h],
