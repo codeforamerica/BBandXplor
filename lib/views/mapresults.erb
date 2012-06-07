@@ -46,12 +46,12 @@ function init(){
 		minlng = Math.min( minlng, reports[r][1] );
 		maxlng = Math.max( maxlng, reports[r][1] );
 
-		if(reports[r][2].indexOf("other") > -1){
+		if((reports[r][2].indexOf("other") > -1) || ((reports[r][2].split(",").length == 2) && (reports[r][2].split(",")[0] == "yes"))){
 			// unusual area!
 			marker = new google.maps.Marker({
  				position: new google.maps.LatLng( reports[r][0], reports[r][1] ),
-      			map: map  /*,
-      			icon: "http://google-maps-icons.googlecode.com/files/expert.png" */
+      			map: map,
+      			icon: "http://google-maps-icons.googlecode.com/files/home.png"
       		});
 		}
 		else{
