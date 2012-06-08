@@ -13,6 +13,11 @@ The server-side codebase is a Ruby on Rails app designed for hosting on Heroku.
 <img src="http://i.imgur.com/eozvR.png" width="380"/>
 <img src="http://i.imgur.com/HUMLk.png" width="380"/>
 
+## Requesting a map through GitHub Issues
+If you're new to GIS and Heroku, you can request a map on our site.
+
+Create a GitHub account for yourself, then go to our <a href="https://github.com/codeforamerica/BBandXplor/issues/new">New Issue form</a>. Please explain the dataset, the area which you want covered, and how BBandXplor could be used to answer a simple question about that area.
+
 ## Working with BroadbandMap.gov
 
 ###Shapefiles
