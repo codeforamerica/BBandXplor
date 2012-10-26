@@ -128,6 +128,7 @@ li{
   text-decoration: none;
   padding: 4px;
   border-bottom: 1px solid #ccc;
+  margin-left: -20px;
 }
 li:hover{
   text-decoration: underline;
@@ -137,7 +138,8 @@ li:hover{
 	</head>
 	<body onload="init()">
 		<div id="sidebar">
-			<h3>Terrestrial</h3>
+			<strong>Terrestrial</strong>
+			<br/>
 			<ul>
 				<li>
 					<a id="bel" href="#" class="btn" onclick="toggle(this)">AT&T / Bell South</a>
@@ -170,7 +172,9 @@ li:hover{
 					<a id="xoc" href="#" class="btn" onclick="toggle(this)">XO Comm.</a>
 				</li>
 			</ul>
-			<h3>Wireless</h3>
+			<br/>
+			<strong>Wireless</strong>
+			<br/>
 			<ul>
 				<li>
 					<a id="att" href="#" class="btn" onclick="toggle(this)">AT&amp;T</a>
