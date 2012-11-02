@@ -83,6 +83,9 @@ function toggle(btn){
 	for(var p=0;p<providers.length;p++){
 		if(providers[p].id == btn.id){
 			providers[p].layer.setMap(setLayerOn);
+			infoWindow.setContent( "Download as <a href='/"  + providers[p].url + "'>" + providers[p].url + "</a>");
+			infoWindow.setPosition(map.getCenter());
+			infoWindow.open(map);
 			break;
 		}
 	}
